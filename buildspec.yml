@@ -7,4 +7,4 @@ phases:
       - curl https://raw.githubusercontent.com/synctree/ecr-utils/master/install.sh | bash -
   build:
     commands:
-      - /usr/local/bin/build-image 
+      - /usr/local/bin/build-image -w $SLACK_WEBHOOK -e 975761587630.dkr.ecr.us-west-2.amazonaws.com -n rancher-instance-healthcheck
