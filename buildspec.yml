@@ -1,10 +1,18 @@
-
-version: 0.1
+version: 0.2
 
 phases:
   pre_build:
     commands:
-      - curl https://raw.githubusercontent.com/synctree/ecr-utils/master/install.sh | bash -
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
   build:
     commands:
-      - /usr/local/bin/build-image -w $SLACK_WEBHOOK -e 975761587630.dkr.ecr.us-west-2.amazonaws.com -n rancher-instance-healthcheck
+      - echo Build started on `date`
+      - echo Building the Docker image...          
+      - docker build -t $IMAGE_REPO_NAME:latest .
+      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG      
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
