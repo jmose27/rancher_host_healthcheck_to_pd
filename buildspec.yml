@@ -5,6 +5,3 @@ phases:
   pre_build:
     commands:
       - curl https://raw.githubusercontent.com/synctree/ecr-utils/master/install.sh | bash -
-  build:
-    commands:
-      - /usr/local/bin/build-image 
