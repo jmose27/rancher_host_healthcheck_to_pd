@@ -14,9 +14,6 @@ class InstanceHealthCheck
 
 		@active_alerts = Hash.new
 		
-		#@active_alerts['qa-app-1'] = "1c6746c5f3f2433b945339be3154b037"
-		#@active_alerts['qa-app-2'] = "f53c3d681553416883c574de2906e457"
-		
   	end
 
   	def rcheck()
