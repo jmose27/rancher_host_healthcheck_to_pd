@@ -2,13 +2,9 @@ version: 0.2
 
 phases:
   build:
-    commands:
-      - echo Build started on `date`
-      - echo Building the Docker image...          
+    commands:       
       - docker build -t $DOCKER_BUILD_NAME .
       - docker tag $DOCKER_BUILD_NAME  $AWS_PUSH/$DOCKER_BUILD_NAME  
   post_build:
     commands:
-      - echo Build completed on `date`
-      - echo Pushing the Docker image...
       - docker push $AWS_PUSH/$DOCKER_BUILD_NAME
