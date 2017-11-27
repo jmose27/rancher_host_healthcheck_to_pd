@@ -5,10 +5,10 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t $IMAGE_REPO_NAME:latest .
-      - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:master     
+      - docker build -t $DOCKER_BUILD_NAME .
+      - docker tag $DOCKER_BUILD_NAME  $AWS_PUSH/$DOCKER_BUILD_NAME  
   post_build:
     commands:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
-      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - docker push $AWS_PUSH/$DOCKER_BUILD_NAME
